@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 // // order struct
 // type order struct {
@@ -29,7 +32,35 @@ import "fmt"
 // 	return o.amount
 // }
 
+type customer struct {
+	name  string
+	phone string
+}
+
+type order struct {
+	id        string
+	amount    float32
+	status    string
+	createdAt time.Time
+	customer
+}
+
 func main() {
+	newCustomer := customer{
+		name:  "john",
+		phone: "1234567890",
+	}
+	newOrder := order{
+		id:       "1",
+		amount:   30,
+		status:   "received",
+		customer: newCustomer,
+	}
+
+	newOrder.customer.name = "robin"
+	fmt.Println(newOrder)
+	fmt.Println(newOrder.customer)
+
 	// myOrder := order{
 	// 	id:     "1",
 	// 	amount: 50.99,
@@ -54,10 +85,11 @@ func main() {
 	// myOrder := newOrder("1", 30.50, "received")
 	// fmt.Println(myOrder)
 
-	language := struct {
-		name   string
-		isGood bool
-	} {"golang", true}
+	// language := struct {
+	// 	name   string
+	// 	isGood bool
+	// } {"golang", true}
 
-	fmt.Println(language)
+	// fmt.Println(language)
+
 }
