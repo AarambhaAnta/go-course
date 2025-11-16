@@ -2,20 +2,22 @@ package main
 
 import (
 	"fmt"
-	"time"
+	"sync"
 )
 
-// func task(id int) {
-// 	fmt.Println("doing task: ", id)
-// }
+func task(id int, w *sync.WaitGroup) {
+	defer w.Done()
+	fmt.Println("doing task: ", id)
+}
 
 func main() {
+	var wg sync.WaitGroup
+
 	for i := 0; i <= 10; i++ {
-		// go task(i)
-		go func(id int) {
-			fmt.Println("doing task in anonymous func: ", id)
-		}(i)
+		wg.Add(1)
+		go task(i, &wg)
 	}
 
-	time.Sleep(time.Second * 2)
+	wg.Wait()
+	// main() will wait untill wait group becomes 0
 }
