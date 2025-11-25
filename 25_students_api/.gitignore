@@ -32,7 +32,7 @@ go.work.sum
 .vscode/
 
 # Database
-storage
+storage/*
 
 # Configurations
-config
+config/*
